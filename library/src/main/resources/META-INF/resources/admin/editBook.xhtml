@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  >
+<h:head>
+    <title>Book Details</title>
+</h:head>
+<h:body>
+	
+
+	    <f:metadata>
+	        <f:viewParam name="id" value="#{bookBean.b.id}" />
+	        <f:viewParam name="bname" value="#{bookBean.b.bname}" />
+	        <f:viewParam name="aname" value="#{bookBean.b.aname}" />
+	    </f:metadata>
+
+	    <h:form>
+	        <h2>Edit Book</h2>
+
+	        <p:messages id="msgs" showDetail="true" showSummary="false" autoUpdate="true" />
+
+	        Id:
+	        <h:outputText value="#{bookBean.b.id}" /><br/><br/>
+
+	        Name:
+	        <p:inputText value="#{bookBean.b.bname}" required="true" requiredMessage="Book name is required"/><br/><br/>
+
+	        Author:
+	        <p:inputText value="#{bookBean.b.aname}" required="true" requiredMessage="Author name is required"/><br/><br/>
+
+	        <p:commandButton value="Save"
+	            action="#{bookBean.updBook(bookBean.b.id,
+	                                       bookBean.b.bname,
+	                                       bookBean.b.aname)}"
+										   update="msgs" process="@form"
+										                        ajax="true"/>
+	    </h:form>
+
+	
+
+</h:body>
+</html>

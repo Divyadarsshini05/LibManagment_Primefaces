@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+	   xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head><title>Register</title></h:head>
+<h:body>
+    <h:form>
+        <p:panel header="User Registration">
+			Username:
+            <p:inputText value="#{userBean.user.username}" 
+                         label="Username" required="true"/>
+						 <br/>
+			Password:
+            <p:inputText value="#{userBean.user.pass}" 
+                         label="Password" required="true"/>
+						 <br/>
+			Fullname:
+            <p:inputText value="#{userBean.user.fullname}" 
+                         label="Full Name" required="true"/>
+						 <br/>
+			Role:
+            <p:selectOneMenu value="#{userBean.user.role}">
+                <f:selectItem itemLabel="Member" itemValue="MEMBER"/>
+                <f:selectItem itemLabel="Admin" itemValue="ADMIN"/>
+            </p:selectOneMenu>
+            <p:commandButton value="Register" action="#{userBean.register}" 
+                             update="@form"/>
+			<p:messages id="msgs" showDetail="true" showSummary="false" autoUpdate="true" />
+
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

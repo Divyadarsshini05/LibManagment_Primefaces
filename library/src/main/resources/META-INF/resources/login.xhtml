@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Library Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #c9c797, #b3a7a7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-panel {
+            width: 380px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-link {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+    <h:form>
+
+        <p:panel header="Library Login" styleClass="login-panel">
+
+            <div class="field">
+                <p:outputLabel for="uname" value="Username" />
+                <p:inputText id="uname"
+                             value="#{userBean.username}"
+                             required="true"
+                             placeholder="Enter username" />
+            </div>
+
+            <div class="field">
+                <p:outputLabel for="pass" value="Password" />
+                <p:password id="pass"
+                            value="#{userBean.password}"
+                            required="true"
+                            placeholder="Enter password" />
+            </div>
+
+            <div class="actions">
+                <p:commandButton value="Login"
+                                 action="#{userBean.login}"
+                                 ajax="false"
+                                 style="width:100%;" />
+            </div>
+
+            <p:messages showDetail="true" autoUpdate="true" />
+
+            <div class="register-link">
+                <h:outputText value="Don't have an account? " />
+                <h:link value="Create Account"
+                        outcome="register.xhtml" />
+            </div>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

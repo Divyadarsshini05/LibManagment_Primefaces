@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Adding a Book</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9acb, #ffc1dc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            width: 420px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .form-card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 26px;
+            color: #444;
+        }
+
+        .form-card p {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #666;
+            font-size: 15px;
+        }
+
+        .ui-panelgrid td {
+            padding: 10px 5px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .ui-inputfield {
+            width: 100%;
+            font-size: 15px;
+            padding: 8px;
+        }
+
+        .submit-btn {
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+    <div class="form-card">
+        <h2>Add New Book</h2>
+        <p>You can add books here</p>
+
+        <h:form>
+			<p:messages autoUpdate="true"
+			            showDetail="true"
+			            showSummary="false"
+			            closable="true" />
+
+
+            <p:panelGrid columns="2" style="width:100%">
+                <h:outputLabel for="bname" value="Book Name:"/>
+                <p:inputText id="bname" value="#{bookBean.book.bname}" required="true" requiredMessage="Book name is required" />
+
+                <h:outputLabel for="aname" value="Author Name:"/>
+                <p:inputText id="aname" value="#{bookBean.book.aname}" required="true" requiredMessage="Author name is required" />
+            </p:panelGrid>
+
+            <p:commandButton value="Submit"
+                             action="#{bookBean.save}"
+                             update="@form"
+                             styleClass="submit-btn"/>
+        </h:form>
+    </div>
+
+</h:body>
+</html>

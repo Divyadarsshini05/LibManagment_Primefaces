@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Library Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(199, 197, 151);
+        }
+
+        /* HEADER */
+        .header {
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* LOGOUT BUTTON */
+        .logout-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+        }
+
+        /* GRID LAYOUT */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 40px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        /* CARD */
+        .card-link {
+            display: block;
+            padding: 30px;
+            border: 2px solid black;
+            background: rgb(186, 171, 171);
+            text-decoration: none;
+            color: black;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .card-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .card-link h3 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .card-link p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+    <h:form>
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1>Welcome #{userBean.user.fullname}</h1>
+
+            <!-- LOGOUT -->
+            <div class="logout-btn">
+                <p:commandButton value="Logout"
+                                 action="#{userBean.logout}"
+                                 ajax="false"
+                                 styleClass="ui-button-danger"/>
+            </div>
+        </div>
+
+        <div class="grid-container">
+
+            <!-- ISSUED BOOKS -->
+            <h:commandLink action="#{userBean.showIssuedBooks}" styleClass="card-link">
+                <h3>Issued Books</h3>
+                <p>View all currently issued books</p>
+            </h:commandLink>
+
+            <!-- RETURNED BOOKS -->
+            <h:commandLink action="#{userBean.showReturnedBooks}" styleClass="card-link">
+                <h3>Returned Books</h3>
+                <p>View previously returned books</p>
+            </h:commandLink>
+
+        </div>
+
+    </h:form>
+
+</h:body>
+</html>

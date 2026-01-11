@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>All Books</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: rgb(121, 148, 62);
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .book-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+
+        .book-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+        }
+
+        .book-title:hover {
+            text-decoration: underline;
+        }
+
+        .book-author {
+            margin-top: 10px;
+            font-size: 15px;
+            color: #555;
+        }
+    </style>
+</h:head>
+
+<h:body>
+  <h:form>
+	<p:commandButton value="← Back" action="/admin/index.xhtml?faces-redirect=true" ajax="false" />
+	</h:form>
+    <div class="page-title">📚 All Books</div>
+	
+    <h:form>
+		
+        <p:dataGrid value="#{bookBean.books}"
+                    var="b"
+                    columns="3"
+                    layout="grid"
+                    paginator="false"
+                    style="max-width:1200px;margin:auto;">
+
+            <p:panel styleClass="book-card">
+
+                <f:facet name="header">
+                    <h:link outcome="details"
+                            value="#{b.bname}"
+                            styleClass="book-title">
+                        <f:param name="id" value="#{b.id}" />
+                    </h:link>
+                </f:facet>
+
+                <div class="book-author">
+                    Author: #{b.aname}
+                </div>
+
+            </p:panel>
+        </p:dataGrid>
+    </h:form>
+
+</h:body>
+</html>

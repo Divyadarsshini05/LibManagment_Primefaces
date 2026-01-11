@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Library Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(199, 197, 151);
+        }
+
+        
+        .header {
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        
+        .logout-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+        }
+
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+       
+        .clickable-card a {
+            display: block;
+            padding: 25px;
+            border: 2px solid black;
+            text-decoration: none;
+            color: black;
+            background: rgb(186, 171, 171);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .clickable-card a:hover {
+            transform: translateY(-5px);
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .clickable-card h3 {
+            margin-top: 0;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+    <h:form>
+
+        
+        <div class="header">
+            <h1>Welcome Admin</h1>
+
+         
+            <div class="logout-btn">
+                <p:commandButton value="Logout"
+                                 action="#{userBean.logout}"
+                                 ajax="false"
+                                 styleClass="ui-button-danger"/>
+            </div>
+        </div>
+
+       
+        <div class="grid-container">
+
+            <div class="clickable-card">
+                <a href="addbook.xhtml">
+                    <h3>Add Books</h3>
+                    <p>Click here to add new books</p>
+                </a>
+            </div>
+
+            <div class="clickable-card">
+                <a href="allbook.xhtml">
+                    <h3>Show All Books</h3>
+                    <p>Click here to see all books</p>
+                </a>
+            </div>
+
+            <div class="clickable-card">
+                <a href="allbook.xhtml?filter=issued">
+                    <h3>Issued Books</h3>
+                    <p>Click here to see issued books</p>
+                </a>
+            </div>
+
+            <div class="clickable-card">
+                <a href="allbook.xhtml?filter=available">
+                    <h3>Available Books</h3>
+                    <p>Click here to see available books</p>
+                </a>
+            </div>
+
+        </div>
+
+    </h:form>
+
+</h:body>
+</html>
