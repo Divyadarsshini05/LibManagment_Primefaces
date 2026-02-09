@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:ui="xmlns.jcp.org"
+	  >
+
+<h:head>
+    <title>Library Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(199, 197, 151);
+        }
+
+     
+        .header {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 30px;
+        }
+
+      
+        .clickable-card a {
+            display: block;
+            padding: 20px;
+            border: 2px solid black;
+            text-decoration: none;
+            color: black;
+            background: rgb(186, 171, 171);
+        }
+
+        .clickable-card h3 {
+            margin-top: 0;
+        }
+
+       
+    </style>
+</h:head>
+
+<h:body>
+	<h:form>
+	<p:commandButton value="← Back"
+	                    action="/member/index.xhtml?faces-redirect=true"
+	                    ajax="false" />
+<p:dataTable value="#{userBean.books}" var="b">
+    <p:column headerText="Book Name">
+        #{b.bname}
+    </p:column>
+</p:dataTable>
+
+
+</h:form>
+
+    
+
+</h:body>
+</html>

@@ -1,0 +1,171 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Book Details</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9acb, #ffc1dc);
+        }
+
+        .details-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .details-card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            width: 420px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .details-title {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .detail-row {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #444;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #222;
+        }
+
+        .status-issued {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .status-available {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .btn-group {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .btn-group .ui-button {
+            margin: 6px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+<div class="details-container">
+    <h:form styleClass="details-card">
+		<p:commandButton value="← Back"
+			                    action="/admin/allbook.xhtml?faces-redirect=true"
+			                    />
+        <div class="details-title">Book Details</div>
+
+        <div class="detail-row">
+            <span class="detail-label">Id:</span>
+            <h:outputText value="#{bookBean.b.id}" />
+        </div>
+
+        <div class="detail-row">
+            <span class="detail-label">Name:</span>
+            <h:outputText value="#{bookBean.b.bname}" />
+        </div>
+
+        <div class="detail-row">
+            <span class="detail-label">Author:</span>
+            <h:outputText value="#{bookBean.b.aname}" />
+        </div>
+
+        <div class="detail-row">
+            <span class="detail-label">Status:</span>
+
+            <h:outputText value="Issued"
+                          styleClass="status-issued"
+                          rendered="#{bookBean.b.issued}" />
+
+            <h:outputText value="Available"
+                          styleClass="status-available"
+                          rendered="#{!bookBean.b.issued}" />
+        </div>
+
+        <div class="btn-group">
+			<div class="btn-group">
+
+			    <!-- STEP 2: Dropdown appears ONLY after clicking Issue -->
+			    <h:panelGroup rendered="#{bookBean.showIssueDropdown}">
+
+			        <div class="detail-row">
+			            <span class="detail-label">Issue To:</span>
+
+			            <p:selectOneMenu value="#{bookBean.selectedUserId}"
+			                             required="true"
+			                             requiredMessage="Please select a user"
+			                             style="width:100%">
+			                
+			                <f:selectItem itemLabel="Select User" itemValue="#{null}" />
+			                
+			                <f:selectItems value="#{bookBean.users}"
+			                               var="u"
+			                               itemValue="#{u.id}"
+			                               itemLabel="#{u.username}" />
+			            </p:selectOneMenu>
+			        </div>
+
+			    </h:panelGroup>
+
+			    <!-- STEP 1: First click → Show dropdown -->
+			    <p:commandButton value="Issue Book"
+			                     action="#{bookBean.prepareIssue}"
+			                     rendered="#{!bookBean.b.issued and !bookBean.showIssueDropdown}"
+			                     update="@form" />
+
+			    <!-- STEP 3: Confirm issue -->
+			    <p:commandButton value="Confirm Issue"
+			                     action="#{bookBean.issueBook(bookBean.b.id)}"
+			                     rendered="#{bookBean.showIssueDropdown}"
+			                     update="@form"
+			                     process="@form" />
+
+			    <!-- RETURN -->
+			    <p:commandButton value="Return Book"
+			                     action="#{bookBean.returnBook(bookBean.b.id)}"
+			                     rendered="#{bookBean.b.issued}"
+			                     update="@form" />
+
+			</div>
+
+
+
+            <!-- UPDATE -->
+            <p:commandButton value="Update" action="editBook">
+                <f:param name="id" value="#{bookBean.b.id}" />
+                <f:param name="bname" value="#{bookBean.b.bname}" />
+                <f:param name="aname" value="#{bookBean.b.aname}" />
+            </p:commandButton>
+
+            <!-- DELETE -->
+            <p:commandButton value="Delete"
+                             action="#{bookBean.delBook(bookBean.b.id)}"
+                             styleClass="ui-button-danger"/>
+        </div>
+
+    </h:form>
+</div>
+
+</h:body>
+</html>
